@@ -10,13 +10,9 @@ def render_homepage():
 @app.route('/emotionDetector')
 def get_emotion_results():
     text_to_analyze = request.args.get('textToAnalyze')
-    print("Tecxt: ", text_to_analyze)
-    if text_to_analyze is None:
-        return "No text was provided."
-    
     data = emotion_detector(text_to_analyze)
     if data['dominant_emotion'] is None:
-        return "Error parsing the sentence. Please try later."
+        return "Invalid text! Please try again!."
     
     return (
         f"Based on the analysis, the detected emotion is {data['dominant_emotion']}. "
